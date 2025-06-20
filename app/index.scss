@@ -1,1 +1,5 @@
-@import './styles/global';
+@use './styles/global';
+
+div{
+    text-align: center;
+}
