@@ -1,0 +1,41 @@
+@use '../styles/global' as*;
+h2 {
+    text-align: center;
+    margin-top: 100px;
+}
+#form-div {
+    border: 1px solid lightgray;
+    box-shadow: 0 4px 5px -3px gray;
+    margin-top: 50px;
+    width: 300px;
+    justify-self: center;
+
+    label {
+        margin-top: 10px;
+    }
+
+    button {
+        width: 70px;
+        display: inline-block;
+        margin-left: 30px;
+        background-color: $text-color;
+        color: whitesmoke;
+        border: none;
+        border-radius: 3px;
+        padding: 7px;
+        &:hover {
+            background-color: #47474d;
+        }
+    }
+    #add-btn {
+            margin-left: 100px;
+        }
+}
+
+#user-form {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    margin: 40px;
+    display: flex;
+    flex-direction: column;
+}

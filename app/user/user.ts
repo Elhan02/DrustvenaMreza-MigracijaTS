@@ -2,6 +2,14 @@ import { UserService } from "../services/user.services.js";
 
 const userService = new UserService();
 
+function Initialize(){
+  const addButton = document.querySelector("#add-user-btn")
+  addButton.addEventListener('click', function(){
+    window.location.href = "../usersForm/usersForm.html"
+  })
+  renderUsers();
+}
+
 function renderUsers(): void {
   userService.getAll().then((users) => {
     const table = document.querySelector("table tbody");
@@ -53,4 +61,4 @@ function renderUsers(): void {
   });
 }
 
-document.addEventListener("DOMContentLoaded", renderUsers);
+document.addEventListener("DOMContentLoaded", Initialize);

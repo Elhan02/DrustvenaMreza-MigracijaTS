@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../dist/usersForm/usersForm.css" />
+    <title>Social network - Add User</title>
+  </head>
+  <body>
+    <nav id="navbar">
+      <h1 id="title">Social media</h1>
+      <ul id="nav-links">
+        <li><a href="../user/user.html">User</a></li>
+      </ul>
+    </nav>
+    <h2 id="form-type-header">Add new User</h2>
+    <div id="form-div">
+      <form action="#" id="user-form">
+        <label for="username">User name:</label>
+        <input type="text" name="username" id="username" />
+
+        <label for="firstName">First name:</label>
+        <input type="text" name="firstName" id="firstName" />
+
+        <label for="lastName">Last name:</label>
+        <input type="text" name="lastName" id="lastName" />
+
+        <label for="birthDate">Birth date:</label>
+        <input type="date" name="birthDate" id="birthDate" />
+
+        <p class="required-field hidden">To add user, all fields are required.</p>
+      </form>
+      <button id="cancel-btn">Cancel</button>
+      <button id="add-btn">Create</button>
+    </div>
+
+    <script type="module" src="../../dist/usersForm/usersForm.js"></script>
+  </body>
+</html>

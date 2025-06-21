@@ -1,9 +1,21 @@
 @use'../styles/global' as*;
 
-.hidden {
-    display: none;
-}
-
 h2 {
     text-align: center;
+}
+
+#add-user-btn {
+    display: block;
+    justify-self: center;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    margin-left: 435px;
+    background-color: $text-color;
+    color: whitesmoke;
+    border: none;
+    border-radius: 3px;
+    padding: 5px;
+    &:hover {
+        background-color: #47474d;
+    }
 }
