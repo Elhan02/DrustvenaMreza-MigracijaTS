@@ -64,6 +64,17 @@ function renderUsers(): void {
         }
         cell6.appendChild(editButton);
 
+        const cell7 = document.createElement("td");
+        newRow.appendChild(cell7);
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.className = "tableButton";
+        deleteButton.onclick = function() {
+          userService.delete(user.id);
+          renderUsers();
+        }
+        cell7.appendChild(deleteButton);
+
         table.appendChild(newRow);
       }
     })
