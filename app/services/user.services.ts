@@ -25,6 +25,23 @@ export class UserService {
         })
     }
 
+    getById(id: string): Promise<User>{
+        return fetch(`${this.apiUrl}/${id}`)
+        .then(response => {
+            if(!response.ok){
+                throw {status: response.status, message: response.text}
+            }
+            return response.json()
+        })
+        .then((user: User) => {
+            return user;
+        })
+        .catch(error => {
+            console.error('Error:', error.status)
+            throw error
+        })
+    }
+
     add(formData: UserFormData): Promise<User> {
         return fetch(this.apiUrl, {
             method: 'POST',
@@ -43,7 +60,31 @@ export class UserService {
             if(error.status && error.status === 400){
                 alert('Data is invalid')
             } else {
-                alert('An error occured while creating group. Please try again')
+                alert('An error occured while creating user. Please try again')
+            }
+        })
+
+    }
+
+    update(formData: UserFormData, id: string): Promise<User> {
+        return fetch(`${this.apiUrl}/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        })
+        .then(response => {
+            if(!response.ok){
+                throw {status: response.status, message: response.text}
+            }
+            return response.json();
+        })
+        .catch(error => {
+            console.error('Error: ' + error.status)
+
+            if(error.status && error.status === 400){
+                alert('Data is invalid')
+            } else {
+                alert('An error occured while updating user. Please try again')
             }
         })
 

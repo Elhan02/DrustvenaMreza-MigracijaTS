@@ -19,3 +19,12 @@ h2 {
         background-color: #47474d;
     }
 }
+
+.tableButton {
+        background-color: $text-color;
+        color: whitesmoke;
+        border: none;
+        border-radius: 3px;
+        padding: 5px;
+        width: 50px;
+    }
