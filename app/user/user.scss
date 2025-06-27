@@ -1,4 +1,5 @@
 @use'../styles/global' as*;
+@use '../styles/spinner';
 
 h2 {
     text-align: center;
@@ -18,6 +19,11 @@ h2 {
     &:hover {
         background-color: #47474d;
     }
+}
+
+#no-data-message {
+    text-align: center;
+    color: red;
 }
 
 .tableButton {

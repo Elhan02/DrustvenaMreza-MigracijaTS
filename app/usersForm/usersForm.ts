@@ -3,6 +3,9 @@ import { UserService } from "../../dist/services/user.services.js";
 
 const userService = new UserService();
 
+const spinner = document.querySelector("#spinner");
+const addBtn = document.getElementById("add-btn") as HTMLButtonElement;
+
 function Initialize(): void {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
@@ -28,25 +31,30 @@ function Initialize(): void {
       })
       .catch((error) => {
         console.error(error.status, error.text);
+        throw error;
       });
 
-    const addBtn = document.getElementById("add-btn") as HTMLButtonElement;
     addBtn.textContent = "Update";
-    addBtn.setAttribute('data-tooltip', 'Update existing user')
+    addBtn.setAttribute("data-tooltip", "Update existing user");
     addBtn.disabled = false;
     addBtn.addEventListener("click", function () {
       addBtn.disabled = true;
-      addBtn.textContent = 'Updating...'
-      UpdateUser(id);
+      addBtn.textContent = "Updating...";
+      spinner.classList.remove("hidden");
+      setTimeout(() => {
+        UpdateUser(id);
+      }, 2000);
     });
   } else {
-    const addBtn = document.getElementById("add-btn") as HTMLButtonElement;
-    addBtn.setAttribute('data-tooltip', 'Create new user')
+    addBtn.setAttribute("data-tooltip", "Create new user");
     addBtn.disabled = false;
     addBtn.addEventListener("click", function () {
       addBtn.disabled = true;
-      addBtn.textContent = 'Creating...'
-      AddUser();
+      addBtn.textContent = "Creating...";
+      spinner.classList.remove("hidden");
+      setTimeout(() => {
+        AddUser();
+      }, 2000);
     });
   }
 
@@ -57,18 +65,44 @@ function Initialize(): void {
 }
 
 function UpdateUser(id: string): void {
-    userService.update(GetAndValidate(), id)
+  spinner.classList.add("hidden");
+  const message = document.querySelector("#message") as HTMLParagraphElement;
+  message.textContent = "";
+  userService
+    .update(GetAndValidate(), id)
     .then(() => {
-        window.location.href = "../user/user.html"
+      message.textContent = "User successfully updated. Redirecting...";
+      setTimeout(() => {
+        window.location.href = "../user/user.html";
+      }, 2000);
     })
-    .catch(error => {
-        console.error(error.status, error.text);
-    })
+    .catch((error) => {
+      message.style.color = "red";
+      message.textContent = "Failed to update user. Please try again";
+      console.error(error.status, error.text);
+      addBtn.disabled = false;
+      addBtn.textContent = 'Update';
+    });
 }
 
 function AddUser(): void {
-  userService.add(GetAndValidate());
-  window.location.href = "../user/user.html";
+  spinner.classList.add("hidden");
+  const message = document.querySelector("#message") as HTMLParagraphElement;
+  message.textContent = "";
+  userService.add(GetAndValidate())
+    .then(() => {
+      message.textContent = "User successfully created. Redirecting...";
+      setTimeout(() => {
+        window.location.href = "../user/user.html";
+      }, 2000);
+    })
+    .catch((error) => {
+      message.style.color = "red";
+      message.textContent = "Failed to create user. Please try again.";
+      console.error(error.status, error.text);
+      addBtn.disabled = false;
+      addBtn.textContent = 'Create';
+    })
 }
 
 function GetAndValidate(): UserFormData {

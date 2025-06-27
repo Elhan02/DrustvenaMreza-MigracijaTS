@@ -3,11 +3,16 @@ import { UserService } from "../services/user.services.js";
 const userService = new UserService();
 
 function Initialize() {
+  const spinner = document.querySelector('#spinner')
   const addButton = document.querySelector("#add-user-btn");
   addButton.addEventListener('click', function(){
     window.location.href = "../usersForm/usersForm.html";
   });
-  renderUsers();
+  spinner.classList.remove('hidden')
+  setTimeout(() => {
+    renderUsers();
+    spinner.classList.add('hidden');
+  }, 2000);
 }
 
 function renderUsers(): void {
@@ -80,6 +85,8 @@ function renderUsers(): void {
     })
     .catch((error) => {
       console.error("Error: ", error.status);
+      const noDatamessage = document.querySelector("#no-data-message");
+      noDatamessage.classList.remove('hidden');
     });
 }
 

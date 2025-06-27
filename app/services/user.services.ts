@@ -58,7 +58,7 @@ export class UserService {
         console.error("Error: " + error.status);
 
         if (error.status && error.status === 400) {
-          alert("Data is invalid");
+          throw("Data is invalid");
         } else {
           alert("An error occured while creating user. Please try again");
         }
@@ -81,7 +81,7 @@ export class UserService {
         console.error("Error: " + error.status);
 
         if (error.status && error.status === 400) {
-          alert("Data is invalid");
+          throw("Data is invalid");
         } else {
           alert("An error occured while updating user. Please try again");
         }
