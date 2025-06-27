@@ -30,14 +30,22 @@ function Initialize(): void {
         console.error(error.status, error.text);
       });
 
-    const addBtn = document.getElementById("add-btn");
+    const addBtn = document.getElementById("add-btn") as HTMLButtonElement;
     addBtn.textContent = "Update";
+    addBtn.setAttribute('data-tooltip', 'Update existing user')
+    addBtn.disabled = false;
     addBtn.addEventListener("click", function () {
+      addBtn.disabled = true;
+      addBtn.textContent = 'Updating...'
       UpdateUser(id);
     });
   } else {
-    const addBtn = document.getElementById("add-btn");
+    const addBtn = document.getElementById("add-btn") as HTMLButtonElement;
+    addBtn.setAttribute('data-tooltip', 'Create new user')
+    addBtn.disabled = false;
     addBtn.addEventListener("click", function () {
+      addBtn.disabled = true;
+      addBtn.textContent = 'Creating...'
       AddUser();
     });
   }
